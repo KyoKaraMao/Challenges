@@ -10,7 +10,7 @@ def min_operations(x, y):
         operator = ">"
 
     table = find_min_operations(x,y,operations,operator,-1)
-
+ a asda
 
     print()
     # plan:
