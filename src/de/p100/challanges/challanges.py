@@ -4,7 +4,7 @@ def min_operations(x, y):
     calc = x
     result = list()
     operations = 0
-    if (y < x) and ((y%2)==0):
+    if (y > x) and ((y%2)==0):
         while calc != y:
             if (y % calc) == 0:
                 calc = calc * 2
@@ -45,5 +45,5 @@ def min_operations(x, y):
     return end_result
 
 
-print(min_operations(73, 287))
+print(min_operations(6, 20))
 # (((6 - 1) * 2) * 2) = 20 : 3 operations needed only
