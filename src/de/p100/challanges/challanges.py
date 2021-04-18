@@ -1,55 +1,49 @@
 def min_operations(x, y):
     # multiply by 2
     # substract by 1
-    operations = 1
-    if x == y:
-        print(operations)
-
-    newTable = list()
-    table = find_min_operations(x,y,operations, 1, newTable, 20)
-    myBestTable = table
-    table = find_min_operations(x,y,operations, 2, newTable, len(myBestTable))
-    myBestTable = myBestTable[:-1]
-    if len(myBestTable) > len(table):
-        myBestTable = table
-    print(myBestTable)
-
-    # plan:
-    # Schleife solange bis x == y oder x > y wenn x am Anfang < y war
-    # Testen schnellster weg mit wenn anzahl schritt > als vorheriger weg dann dieser weg
-    # wenn mehr schritte dann ein schritt zurück und das andere testen
-
-def find_min_operations(x, y, operations, calc, startTable, max):
-    bestTable = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-    currentTable = startTable
-    currentTable.insert(operations, calc)
-    if calc == 1:
-        x = x-1
+    calc = x
+    result = list()
+    operations = 0
+    if (y < x) and ((y%2)==0):
+        while calc != y:
+            if (y % calc) == 0:
+                calc = calc * 2
+                result.append(2)
+                operations += 1
+            else:
+                calc = calc - 1
+                result.append(1)
+                operations += 1
     else:
-        x = x*2
-    if x==y:
-        return currentTable
-    if len(currentTable) >= max:
-        return bestTable
-    table = find_min_operations(x,y,operations+ 1, 2, currentTable, max)
+        while calc != y:
+            if (((y+1) % calc) == 0) and (calc<y):
+                calc = calc * 2
+                result.append(2)
+                operations += 1
+            else:
+                calc = calc - 1
+                result.append(1)
+                operations += 1
     try:
-        if len(bestTable) > len(table):
-            bestTable = table
-            if max > len(bestTable):
-                max = len(bestTable)
+        if(len(result) < len(best_result)):
+            best_result = result
     except:
-        bestTable = table
-    currentTable = table[:-1]
-    table = find_min_operations(x,y,operations + 1, 1, currentTable, max)
-    try:
-        if len(bestTable) > len(table):
-            bestTable = table
-            if max > len(bestTable):
-                max = len(bestTable)
-    except:
-        bestTable = table
+        best_result = result
 
-    return bestTable
+    end_result = ""
+    for each in best_result:
+        end_result = end_result + "("
+    end_result = end_result + format(x)
+    for each in best_result:
+        if each == 1:
+            end_result = end_result + " - 1)"
+        if each == 2:
+            end_result = end_result + " * 2)"
 
-print(min_operations(6, 20))
+    end_result = end_result + "= {} : {} operations needed only".format(y,operations)
+
+    return end_result
+
+
+print(min_operations(73, 287))
 # (((6 - 1) * 2) * 2) = 20 : 3 operations needed only
