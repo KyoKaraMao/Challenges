@@ -4,6 +4,7 @@ def min_operations(x, y):
     calc = x
     result = list()
     operations = 0
+    #Gerade
     if (y > x) and ((y%2)==0):
         while calc != y:
             if (y % calc) == 0:
@@ -14,6 +15,7 @@ def min_operations(x, y):
                 calc = calc - 1
                 result.append(1)
                 operations += 1
+    #Ungerade
     else:
         while calc != y:
             if (((y+1) % calc) == 0) and (calc<y):
