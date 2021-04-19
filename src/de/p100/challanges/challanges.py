@@ -12,6 +12,7 @@ def min_operations(x, y):
                 calc = calc - 1
                 result.append(1)
             if len(result)>40:
+                result = list()
                 break
     else:
         while calc != y:
@@ -22,6 +23,7 @@ def min_operations(x, y):
                 calc = calc - 1
                 result.append(1)
             if len(result)>40:
+                result = list()
                 break
 
     best_result = result
@@ -34,10 +36,15 @@ def min_operations(x, y):
         else:
             calc = calc + 1
             result.append(1)
+        if len(result)>40:
+            result = list()
+            break
 
     if(len(result) < len(best_result)):
         best_result = result
 
+    if len(best_result) == 0:
+        return "Mehr als 40 operationen nötig"
     end_result = ""
     for each in best_result:
         end_result = end_result + "("
