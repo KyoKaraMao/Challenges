@@ -2,6 +2,7 @@ def min_operations(x, y):
     # multiply by 2
     # substract by 1
     calc = x
+    max_operation = 300
     result = list()
     if (y > x) and ((y%2)==0):
         while calc != y:
@@ -11,7 +12,7 @@ def min_operations(x, y):
             else:
                 calc = calc - 1
                 result.append(1)
-            if len(result)>40:
+            if len(result)>max_operation:
                 result = list()
                 break
     else:
@@ -22,7 +23,7 @@ def min_operations(x, y):
             else:
                 calc = calc - 1
                 result.append(1)
-            if len(result)>40:
+            if len(result)>max_operation:
                 result = list()
                 break
 
@@ -36,15 +37,16 @@ def min_operations(x, y):
         else:
             calc = calc + 1
             result.append(1)
-        if len(result)>40:
+        if len(result)>max_operation:
             result = list()
             break
 
     if(len(result) < len(best_result)):
+        result.reverse()
         best_result = result
 
     if len(best_result) == 0:
-        return "Mehr als 40 operationen nötig"
+        return "Mehr als {} operationen nötig".format(max_operation)
     end_result = ""
     for each in best_result:
         end_result = end_result + "("
@@ -60,5 +62,5 @@ def min_operations(x, y):
     return end_result
 
 
-print(min_operations(10, 110))
+print(min_operations(1, 9999))
 # (((6 - 1) * 2) * 2) = 20 : 3 operations needed only
