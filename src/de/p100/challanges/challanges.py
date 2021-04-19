@@ -11,6 +11,8 @@ def min_operations(x, y):
             else:
                 calc = calc - 1
                 result.append(1)
+            if len(result)>40:
+                break
     else:
         while calc != y:
             if (((y+1) % calc) == 0) and (calc<y):
@@ -19,6 +21,8 @@ def min_operations(x, y):
             else:
                 calc = calc - 1
                 result.append(1)
+            if len(result)>40:
+                break
 
     best_result = result
 
@@ -49,5 +53,5 @@ def min_operations(x, y):
     return end_result
 
 
-print(min_operations(6, 20))
+print(min_operations(10, 110))
 # (((6 - 1) * 2) * 2) = 20 : 3 operations needed only
