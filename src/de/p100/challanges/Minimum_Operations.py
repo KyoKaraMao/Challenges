@@ -103,4 +103,6 @@ while run == 'y':
     # run the function again if input is y
     run = input('Run Again? (y/n): ')
     print()
-print('Happy calculating!')
+
+# goodbye message
+print('Thank you for calculating!')
