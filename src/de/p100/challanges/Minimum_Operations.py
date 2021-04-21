@@ -69,7 +69,7 @@ while run == 'y':
         print()
         continue
 
-    # start the timer
+    # starting the timer
     start = timeit.default_timer()
     values.append(second)
     print()
