@@ -21,7 +21,10 @@ def min_operations(x, y):
 
     # if x > y subtract 1
     if x > y:
-        operations.append('- 1 ({}x)'.format(int(x - y)))
+        if x - y > 1:
+            operations.append('- 1 ({}x)'.format(int(x - y)))
+        else:
+            operations.append('- 1')
         values.append(int(x))
         return x - y
 
@@ -66,25 +69,38 @@ while run == 'y':
         print()
         continue
 
+    # start the timer
     start = timeit.default_timer()
     values.append(second)
     print()
+
+    # running the function with the numbers from input
     print('Operations needed to go from {} to {}:'.format(first, second),
           '\033[1m' + str(int(min_operations(int(first), int(second)))) + '\033[0m')
+
+    # reversing the lists of operations so they fit the way from x to z
     operations.reverse()
     operations.append(' ')
     values.reverse()
+
+    # making the lists into a dataframe
     operation_list = pd.DataFrame(
         {'x': values,
          'op': operations
          })
-
     print(operation_list)
     print()
+
+    # stopping the timer
     stop = timeit.default_timer()
     print('Time: ', stop - start)
+    print()
+
+    # resetting the lists
     operations = []
     values = []
+
+    # run the function again if input is y
     run = input('Run Again? (y/n): ')
     print()
-    print('Happy calculating!')
+print('Happy calculating!')
