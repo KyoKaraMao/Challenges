@@ -3,7 +3,18 @@ import pandas as pd
 
 
 operations = []
+values = []
+
+
 def min_operations(x, y):
+    """
+    :param x: First Number, must be integer
+    :param y: Second Number, must be integer
+    :return: Number of operations needed to go from x to y while
+             only subtracting 1 from x or multiplying x by 2
+             and the actual operations that need to be done
+    """
+
     # no calculations needed when x = y
     if x == y:
         return 0
@@ -11,6 +22,7 @@ def min_operations(x, y):
     # if x > y subtract 1
     if x > y:
         operations.append('- 1 ({}x)'.format(int(x - y)))
+        values.append(int(x))
         return x - y
 
     # not possible when x is negative and y is positive
@@ -21,11 +33,13 @@ def min_operations(x, y):
     # y > x and y is odd, so subtract 1 from x
     if y % 2 == 1:
         operations.append('- 1')
+        values.append(int(y - 1))
         return 1 + min_operations(x, y + 1)
 
     # y is even, so multiply x by 2
     else:
         operations.append('* 2')
+        values.append(int(y / 2))
         return 1 + min_operations(x, y / 2)
 
 
@@ -53,15 +67,23 @@ while run == 'y':
         continue
 
     start = timeit.default_timer()
+    values.append(second)
     print()
     print('Operations needed to go from {} to {}:'.format(first, second),
           '\033[1m' + str(int(min_operations(int(first), int(second)))) + '\033[0m')
     operations.reverse()
-    operations = pd.DataFrame({' ': operations})
-    print(operations)
+    operations.append(' ')
+    values.reverse()
+    operation_list = pd.DataFrame(
+        {'x': values,
+         'op': operations
+         })
+
+    print(operation_list)
     print()
     stop = timeit.default_timer()
     print('Time: ', stop - start)
     operations = []
+    values = []
     run = input('Run Again? (y/n): ')
     print()
