@@ -1,43 +1,67 @@
 import timeit
+import pandas as pd
 
+
+operations = []
 def min_operations(x, y):
-    # multiply by 2
-    # substract by 1
-    calc = y
+    # no calculations needed when x = y
+    if x == y:
+        return 0
 
-    result = list()
-    while calc != x:
-        if calc < x:
-            result_end = [1] * int(x - calc)
-            result.extend(result_end)
-            break
-        if ((calc %2) == 0):
-            calc = calc / 2
-            result.append(2)
-        else:
-            calc = calc + 1
-            result.append(1)
+    # if x > y subtract 1
+    if x > y:
+        operations.append('- 1 ({}x)'.format(int(x - y)))
+        return x - y
 
-    best_result = result
+    # not possible when x is negative and y is positive
+    if x <= 0 < y:
+        print('Impossible')
+        return -1
 
-    end_result = ""
-    for each in best_result:
-        end_result = end_result + "("
-    end_result = end_result + format(x)
-    for each in best_result:
-        if each == 1:
-            end_result = end_result + " - 1)"
-        if each == 2:
-            end_result = end_result + " * 2)"
+    # y > x and y is odd, so subtract 1 from x
+    if y % 2 == 1:
+        operations.append('- 1')
+        return 1 + min_operations(x, y + 1)
 
-    end_result = end_result + "= {} : {} operations needed only".format(y,len(best_result))
+    # y is even, so multiply x by 2
+    else:
+        operations.append('* 2')
+        return 1 + min_operations(x, y / 2)
 
-    return end_result
 
-start = timeit.default_timer()
+# rerunning the program
+run = 'y'
 
-print(min_operations(42357, 87877346))
-# (((6 - 1) * 2) * 2) = 20 : 3 operations needed only
-stop = timeit.default_timer()
-print('Time: ', stop - start)
-print()
+
+while run == 'y':
+    # Enter x value and check if it's an integer
+    first = input('Enter x-value: ')
+    try:
+        int(first)
+    except:
+        print('Numbers must be integers!')
+        print()
+        continue
+
+    # enter y value and check if it's an integer
+    second = input('Enter y-value: ')
+    try:
+        int(second)
+    except:
+        print('Numbers must be integers!')
+        print()
+        continue
+
+    start = timeit.default_timer()
+    print()
+    print('Operations needed to go from {} to {}:'.format(first, second),
+          '\033[1m' + str(int(min_operations(int(first), int(second)))) + '\033[0m')
+    operations.reverse()
+    operations = pd.DataFrame({' ': operations})
+    print(operations)
+    print()
+    stop = timeit.default_timer()
+    print('Time: ', stop - start)
+    operations = []
+    run = input('Run Again? (y/n): ')
+    print()
