@@ -87,3 +87,4 @@ while run == 'y':
     values = []
     run = input('Run Again? (y/n): ')
     print()
+    print('Happy calculating!')
