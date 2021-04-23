@@ -57,7 +57,7 @@ def minOperations(x, y):
             q.put(n)
 
 stop = timeit.default_timer()
-print('Time : ', stop - start)
+print('Time: ', stop - start)
 # Driver code
 if __name__ == '__main__':
     x = 4
