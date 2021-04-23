@@ -82,7 +82,7 @@ while run == 'y':
     values.reverse()
 
     if short_print == 'y':
-        # making the lists into a dataframe
+        # find the length of the longest value
         length_last_item = len(values[-1])
         for number, operator in zip(values, operations):
             print((str(number).ljust((length_last_item + 2), ' ')), '|', operator)
