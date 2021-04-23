@@ -65,7 +65,7 @@ while run == 'y':
         print()
         continue
 
-    short_print = input('Enter y if you whant "short" print: ')
+    short_print = input('Enter y if you want "short" print: ')
 
     # starting the timer
     start = timeit.default_timer()
@@ -90,16 +90,9 @@ while run == 'y':
         print(operation_list)
         print()
     else:
-        itter = 0
-        for i in range(0,len(operations)):
-            each = operations[i]
-            if '(' in each:
-                itter = each[each.find("(")+1:each.find("x")]
-                for item in range(0,int(itter)):
-                    print('{} |-1'.format(int(first)))
-                    first = int(first) - 1
-            else:
-                print('{} |{}'.format(values[i], each))
+        length_last_item = len(values[-1])
+        for number, operator in zip(values, operations):
+            print((str(number).ljust((length_last_item + 2), ' ')),'|', operator)
 
     # stopping the timer
     stop = timeit.default_timer()
