@@ -1,10 +1,8 @@
 import timeit
 import pandas as pd
 
-
 operations = []
 values = []
-
 
 def min_operations(x, y):
     """
@@ -45,10 +43,8 @@ def min_operations(x, y):
         values.append(int(y / 2))
         return 1 + min_operations(x, y / 2)
 
-
 # rerunning the program
 run = 'y'
-
 
 while run == 'y':
     # Enter x value and check if it's an integer
@@ -69,6 +65,8 @@ while run == 'y':
         print()
         continue
 
+    short_print = input('Enter y if you whant "short" print: ')
+
     # starting the timer
     start = timeit.default_timer()
     values.append(second)
@@ -83,13 +81,25 @@ while run == 'y':
     operations.append(' ')
     values.reverse()
 
-    # making the lists into a dataframe
-    operation_list = pd.DataFrame(
-        {'x': values,
-         'op': operations
-         })
-    print(operation_list)
-    print()
+    if short_print == 'y':
+        # making the lists into a dataframe
+        operation_list = pd.DataFrame(
+            {'x': values,
+             'op': operations
+             })
+        print(operation_list)
+        print()
+    else:
+        itter = 0
+        for i in range(0,len(operations)):
+            each = operations[i]
+            if '(' in each:
+                itter = each[each.find("(")+1:each.find("x")]
+                for item in range(0,int(itter)):
+                    print('{} |-1'.format(int(first)))
+                    first = int(first) - 1
+            else:
+                print('{} |{}'.format(values[i], each))
 
     # stopping the timer
     stop = timeit.default_timer()
