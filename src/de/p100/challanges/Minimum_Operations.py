@@ -65,7 +65,7 @@ while run == 'y':
         print()
         continue
 
-    short_print = input('Enter y if you whant "short" print: ')
+    short_print = input('Enter y if you want "short" print: ')
 
     # starting the timer
     start = timeit.default_timer()
