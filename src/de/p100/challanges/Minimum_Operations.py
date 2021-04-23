@@ -85,7 +85,7 @@ while run == 'y':
         # find the length of the longest value
         length_last_item = len(values[-1])
         for number, operator in zip(values, operations):
-            print((str(number).ljust((length_last_item + 2), ' ')), '|', operator)
+            print((str(number).ljust((length_last_item + 1), ' ')), '|', operator)
         print()
 
     else:
