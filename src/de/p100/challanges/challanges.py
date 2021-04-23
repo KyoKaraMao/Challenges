@@ -46,7 +46,7 @@ def min_operations(x, y):
         best_result = result
 
     if len(best_result) == 0:
-        return "Mehr als {} operationen nötig".format(max_operation)
+        return "Mehr als {} op_erationen nötig".format(max_operation)
     end_result = ""
     for each in best_result:
         end_result = end_result + "("
